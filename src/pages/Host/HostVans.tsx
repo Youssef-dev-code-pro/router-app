@@ -39,7 +39,7 @@ export default function Vans() {
   ));
 
   return (
-    <div>
+    <div className="host-vans">
       <h1>Your Listed Vans</h1>
       {myElements}
     </div>

@@ -67,30 +67,33 @@ export default function Vans() {
 
   return (
     <div className="van-list-container">
-      <button
-        onClick={() => handleSearchParams("type", "simple")}
-        className={`van-type simple selected`}
-      >
-        simple
-      </button>
-      <button
-        onClick={() => handleSearchParams("type", "luxury")}
-        className={`van-type luxury selected`}
-      >
-        luxury
-      </button>
-      <button
-        onClick={() => handleSearchParams("type", "rugged")}
-        className={`van-type rugged selected`}
-      >
-        rugged
-      </button>
-      <button
-        onClick={() => handleSearchParams("type", null)}
-        className="van-type clear-filters"
-      >
-        clear
-      </button>
+      <div className="buttons">
+        <button
+          onClick={() => handleSearchParams("type", "simple")}
+          className={`van-type simple selected`}
+        >
+          simple
+        </button>
+        <button
+          onClick={() => handleSearchParams("type", "luxury")}
+          className={`van-type luxury selected`}
+        >
+          luxury
+        </button>
+        <button
+          onClick={() => handleSearchParams("type", "rugged")}
+          className={`van-type rugged selected`}
+        >
+          rugged
+        </button>
+        <button
+          onClick={() => handleSearchParams("type", null)}
+          className="van-type clear-filters"
+        >
+          clear
+        </button>
+      </div>
+
       <h1>Explore our van options</h1>
       <div className="van-list">{vanElements}</div>
     </div>
