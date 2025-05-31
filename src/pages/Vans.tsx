@@ -1,7 +1,7 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
-import { getVans } from "../api";
 
 type Van = {
   id: string;
@@ -22,9 +22,8 @@ export default function Vans() {
     const fetchFireBase = async () => {
       console.log("بدء جلب الفانز من فايرستور...");
       try {
-        const data = await getVans();
-        console.log(data);
-        setVans(data);
+        const res = await axios("api/vans");
+        setVans(res.data.vans);
       } catch (error) {
         console.log("في مشكلة في جلب البيانات:", error);
       }

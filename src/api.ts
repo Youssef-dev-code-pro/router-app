@@ -7,8 +7,10 @@ import {
   getDoc,
   query,
   where,
+  connectFirestoreEmulator,
 } from "firebase/firestore";
 
+// إعدادات الفايربيز بتاعتك
 const firebaseConfig = {
   apiKey: "AIzaSyABgdGKzGueLyQIvV2moC85NzdrnFXQfg4",
   authDomain: "vans-life-f6ab6.firebaseapp.com",
@@ -19,7 +21,7 @@ const firebaseConfig = {
   measurementId: "G-51D5DVD9TS",
 };
 
-// Types
+// تعريف نوع البيانات Van
 type Van = {
   id: string;
   name: string;
@@ -30,12 +32,17 @@ type Van = {
   hostId: string;
 };
 
-// Init
+// تهيئة التطبيق وقاعدة البيانات
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+
+// توصيل المحاكي (لو شغال على محلي)
+connectFirestoreEmulator(db, "localhost", 8080);
+
+// تعريف المرجع للـ collection "vans"
 const vansCollectionRef = collection(db, "vans");
 
-// Fetch all vans
+// دالة لجلب كل الفانات
 export async function getVans(): Promise<Van[]> {
   try {
     console.log("داخل getVans قبل getDocs");
@@ -56,7 +63,7 @@ export async function getVans(): Promise<Van[]> {
   }
 }
 
-// Fetch single van by ID
+// دالة لجلب فان معين حسب الـ id
 export async function getVan(id: string): Promise<Van> {
   try {
     const docRef = doc(db, "vans", id);
@@ -72,7 +79,7 @@ export async function getVan(id: string): Promise<Van> {
   }
 }
 
-// Fetch host vans
+// دالة لجلب العربيات الخاصة بهوست معين (hostId = "123")
 export async function getHostVans(): Promise<Van[]> {
   try {
     const q = query(vansCollectionRef, where("hostId", "==", "123"));
